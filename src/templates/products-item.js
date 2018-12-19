@@ -3,6 +3,7 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
+import { Col, Row } from 'antd';
 
 class ProductPostTemplate extends React.Component {
   render() {
@@ -18,6 +19,27 @@ class ProductPostTemplate extends React.Component {
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${post.frontmatter.title} | ${siteTitle}`}
         />
+        <Row type="flex" justify="center">
+          <Col xs={24} sm={8} lg={6} >col-12</Col>
+          <Col xs={24} sm={16} lg={18} >
+            <h1>{post.frontmatter.title}</h1>
+            <p>
+              {post.frontmatter.date}
+            </p>
+            <p>
+              {post.frontmatter.code}
+            </p>
+            <p>
+              {post.frontmatter.price}
+            </p>
+            <p>
+              {post.frontmatter.stock}
+            </p>
+            <p>
+              {post.frontmatter.discount} %
+          </p>
+          </Col>
+        </Row>
         <h1>{post.frontmatter.title}</h1>
         <p>
           {post.frontmatter.date}

@@ -19,11 +19,11 @@ class BlogIndex extends React.Component {
           meta={[{ name: 'description', content: siteDescription }]}
           title={siteTitle}
         />
-        <Row xs={8} sm={16} md={24} lg={32}>
+        <Row type="flex" justify="center">
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
             return (
-              <Col style={{margin:'10px'}} xs={22} sm={10} md={8} lg={6} xl={5}>
+              <Col style={{margin:'5px'}} xs={10} sm={7} md={5} lg={5} xl={4}>
                 <ProductItem data={node} key={node.fields.slug} />
               </Col>
             )

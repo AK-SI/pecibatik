@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { Menu } from 'antd';
+import { Menu,Col } from 'antd';
 const AntL = require('antd').Layout
 const { Header, Content, Footer } = AntL;
 
@@ -26,8 +26,8 @@ class Layout extends React.Component {
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+        <Content>
+          <div style={{ background: '#fff' }} xs={24} sm={16} md={10} lg={8}>
             {children}
           </div>
         </Content>
