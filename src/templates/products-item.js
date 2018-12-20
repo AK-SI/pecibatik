@@ -11,7 +11,7 @@ class ProductPostTemplate extends React.Component {
     const siteTitle = this.props.data.site.siteMetadata.title
     const siteDescription = post.excerpt
     const { previous, next } = this.props.pageContext
-
+    
     const Harga = props => {
       if (post.frontmatter.discount>0){
         return <p style={{color:'#000'}}>Harga : <del>{`Rp. ${post.frontmatter.price}`}</del> {post.frontmatter.discount && `Rp. ${post.frontmatter.price - ((post.frontmatter.price * post.frontmatter.discount) / 100)}`}</p>        
@@ -29,7 +29,7 @@ class ProductPostTemplate extends React.Component {
         <Row  style={{marginTop:'30px'}} type="flex" justify="center">
           <Col xs={24} sm={8} lg={6}>
             <Card bordered={false}
-              cover={post.frontmatter.image && <img src={post.frontmatter.image.childImageSharp.resize.src} />}
+              cover={post.frontmatter.image && <img src={post.frontmatter.images[0].img.childImageSharp.resize.src} />}
             />
             </Col>
           <Col xs={24} sm={16} lg={18} >
@@ -47,6 +47,11 @@ class ProductPostTemplate extends React.Component {
             
         </Row><Divider>Deskripsi</Divider>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
+        {
+          post.frontmatter.images.map(({img}) => {
+            return <img src={img.childImageSharp.resize.src} key={img.id}/>
+          })
+        }
         <Divider/>
         <ul>
           <li>
@@ -93,13 +98,16 @@ export const pageQuery = graphql`
         stock
         discount
         tags
-        image {
-          childImageSharp {
+        images{
+          img{
+            id
+            childImageSharp {
               resize(width: 400, height: 400, cropFocus: CENTER) {
                 src
               }
             }
           }
+        }
       }
     }
   }

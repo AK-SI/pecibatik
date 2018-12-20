@@ -34,10 +34,12 @@ exports.createPages = ({ graphql, actions }) => {
                     code
                     price
                     discount
-                    image {
-                      childImageSharp {
-                        resize(width: 250, height: 300, cropFocus: CENTER) {
-                          src
+                    images{
+                      img{
+                        childImageSharp {
+                          resize(width: 400, height: 400, cropFocus: CENTER) {
+                            src
+                          }
                         }
                       }
                     }

@@ -23,9 +23,9 @@ class BlogIndex extends React.Component {
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
             return (
-              <Col xxs={24} xs={12} sm={8} md={6} lg={6} xl={4}>
+              <Col xxs={24} xs={12} sm={8} md={6} lg={6} xl={4} key={node.fields.slug} >
               <div style={{padding:'.4em 0'}}>
-                  <ProductItem data={node} key={node.fields.slug} />
+                  <ProductItem data={node} />
               </div>
               </Col>
             )
@@ -61,10 +61,12 @@ export const pageQuery = graphql`
             code
             price
             discount
-            image {
-              childImageSharp {
-                resize(width: 250, height: 300, cropFocus: CENTER) {
-                  src
+            images{
+              img{
+                childImageSharp {
+                  resize(width: 400, height: 400, cropFocus: CENTER) {
+                    src
+                  }
                 }
               }
             }

@@ -1,7 +1,9 @@
 ---
 title: product1
 date: 2018-12-14T17:03:24.260Z
-image: /img/20180122_201719.jpg
+images:
+  - img: /img/20180122_201719.jpg
+  - img: /img/20180122_201719.jpg
 code: DF
 price: '333'
 stock: '4'
