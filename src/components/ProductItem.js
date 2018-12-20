@@ -1,5 +1,5 @@
 import React from 'react' 
-import { Card } from 'antd';
+import { Card, Badge, Icon } from 'antd';
 import { Link } from 'gatsby'
 
 const { Meta } = Card;
@@ -11,13 +11,11 @@ class ProductItem extends React.Component {
     <Link to={data.fields.slug}>
       <Card
         hoverable
-        title={data.frontmatter.title}
-        extra={data.frontmatter.discount>0 && `${data.frontmatter.discount}% OFF`}
         cover={data.frontmatter.image && <img src={data.frontmatter.image.childImageSharp.resize.src} />}
-      >
-        <Meta
-          description={`Rp. ${data.frontmatter.price - ((data.frontmatter.price*data.frontmatter.discount)/100)}`}
-        />
+        >
+          <p>{data.frontmatter.title}</p>
+          <p>{data.frontmatter.discount > 0 && <del>Rp. {`${data.frontmatter.price}`}</del>}</p>
+          <p>{`Rp. ${data.frontmatter.price - ((data.frontmatter.price * data.frontmatter.discount) / 100)}`}</p>
       </Card></Link >
     )
   }

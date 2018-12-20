@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import { Col, Row } from 'antd';
+import { Divider,Card,Col, Row } from 'antd';
 
 class ProductPostTemplate extends React.Component {
   render() {
@@ -12,6 +12,13 @@ class ProductPostTemplate extends React.Component {
     const siteDescription = post.excerpt
     const { previous, next } = this.props.pageContext
 
+    const Harga = props => {
+      if (post.frontmatter.discount>0){
+        return <p style={{color:'#000'}}>Harga : <del>{`Rp. ${post.frontmatter.price}`}</del> {post.frontmatter.discount && `Rp. ${post.frontmatter.price - ((post.frontmatter.price * post.frontmatter.discount) / 100)}`}</p>        
+      }else{
+        return <p style={{ color: '#000' }}>Harga : {`Rp. ${post.frontmatter.price}`}</p>
+      }
+    }
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Helmet
@@ -19,45 +26,28 @@ class ProductPostTemplate extends React.Component {
           meta={[{ name: 'description', content: siteDescription }]}
           title={`${post.frontmatter.title} | ${siteTitle}`}
         />
-        <Row type="flex" justify="center">
-          <Col xs={24} sm={8} lg={6} >col-12</Col>
+        <Row  style={{marginTop:'30px'}} type="flex" justify="center">
+          <Col xs={24} sm={8} lg={6}>
+            <Card bordered={false}
+              cover={post.frontmatter.image && <img src={post.frontmatter.image.childImageSharp.resize.src} />}
+            />
+            </Col>
           <Col xs={24} sm={16} lg={18} >
-            <h1>{post.frontmatter.title}</h1>
-            <p>
-              {post.frontmatter.date}
-            </p>
-            <p>
-              {post.frontmatter.code}
-            </p>
-            <p>
-              {post.frontmatter.price}
-            </p>
-            <p>
-              {post.frontmatter.stock}
-            </p>
-            <p>
-              {post.frontmatter.discount} %
-          </p>
+            <Card bordered={false}>
+              <h1>{post.frontmatter.title}</h1>
+              <p style={{ color: '#000' }}>
+                <b>Kode Produk : {post.frontmatter.code}</b>
+              </p>
+              <Harga/>
+              <p style={{ color: '#000' }}>
+                Barang Tersedia : {post.frontmatter.stock}
+              </p>
+            </Card>
           </Col>
-        </Row>
-        <h1>{post.frontmatter.title}</h1>
-        <p>
-          {post.frontmatter.date}
-        </p>
-        <p>
-          {post.frontmatter.code}
-        </p>
-        <p>
-          {post.frontmatter.price}
-        </p>
-        <p>
-          {post.frontmatter.stock}
-        </p>
-        <p>
-          {post.frontmatter.discount} %
-        </p>
+            
+        </Row><Divider>Deskripsi</Divider>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr/>
+        <Divider/>
         <ul>
           <li>
             {
@@ -103,6 +93,13 @@ export const pageQuery = graphql`
         stock
         discount
         tags
+        image {
+          childImageSharp {
+              resize(width: 400, height: 400, cropFocus: CENTER) {
+                src
+              }
+            }
+          }
       }
     }
   }

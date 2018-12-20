@@ -26,10 +26,10 @@ class Layout extends React.Component {
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
         </Header>
-        <Content>
-          <div style={{ background: '#fff' }} xs={24} sm={16} md={10} lg={8}>
+        <Content style={{display:'flex',justifyContent:'center'}}>
+          <Col style={{ background: '#fff' }} xs={22} md={21}>
             {children}
-          </div>
+          </Col>
         </Content>
       </AntL>
     )
