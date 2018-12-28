@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
+import CurrencyFormat from 'react-currency-format';
 
 import Layout from '../components/Layout'
 import { Icon,Button,Carousel,Divider,Card,Col, Row } from 'antd';
@@ -16,7 +17,7 @@ class ProductPostTemplate extends React.Component {
       if (post.frontmatter.discount>0){
         return <p style={{color:'#000'}}>Harga : <del>{`Rp. ${post.frontmatter.price}`}</del> {post.frontmatter.discount && `Rp. ${post.frontmatter.price - ((post.frontmatter.price * post.frontmatter.discount) / 100)}`}</p>        
       }else{
-        return <p style={{ color: '#000' }}>Harga : {`Rp. ${post.frontmatter.price}`}</p>
+        return <CurrencyFormat value={post.frontmatter.price - ((post.frontmatter.price * post.frontmatter.discount) / 100)} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} renderText={value => <p style={{ color: '#000' }}>Harga : {value.replace(',', '.')}</p>} />
       }
     }
     return (
@@ -31,7 +32,7 @@ class ProductPostTemplate extends React.Component {
             <Carousel autoplay effect="fade">
               {
                 post.frontmatter.images.map(({ img }) => {
-                  return <div><div style={{ width: '100%', minHeight: '350px', background:`#333 url(${img.childImageSharp.fluid.src}) no-repeat center center fixed`, backgroundSize: "contain" }} key={img.id}></div></div>
+                  return <div><div style={{ width: '100%', minHeight: '350px', background:`#001529 url(${img.childImageSharp.fluid.src}) no-repeat center center fixed`, backgroundSize: "contain" }} key={img.id}></div></div>
                 })
               }
             </Carousel>

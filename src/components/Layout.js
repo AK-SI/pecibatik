@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import './style.css'
-import { Menu,Col } from 'antd';
+import { Badge,Button,Affix, Menu,Col } from 'antd';
 const AntL = require('antd').Layout
 const { Header, Content, Footer } = AntL;
 
@@ -31,6 +31,9 @@ class Layout extends React.Component {
             {children}
           </Col>
         </Content>
+        <Affix style={{float:'right', bottom:'10px', marginRight:'10px'}} offsetBottom={10}>
+          <a target='_blank' href={'https://github.com/ak-si/pecibatik'}><Button className='affix-button' type="primary" icon="github">Contribute</Button></a>
+        </Affix>
       </AntL>
     )
   }
