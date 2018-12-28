@@ -31,14 +31,14 @@ class ProductPostTemplate extends React.Component {
             <Carousel autoplay effect="fade">
               {
                 post.frontmatter.images.map(({ img }) => {
-                  return <div><div style={{ width:'100%', minHeight:'350px', background:`url(${img.childImageSharp.fluid.src}) no-repeat center center fixed`, backgroundSize: "cover" }} key={img.id}></div></div>
+                  return <div><div style={{ width: '100%', minHeight: '350px', background:`#333 url(${img.childImageSharp.fluid.src}) no-repeat center center fixed`, backgroundSize: "contain" }} key={img.id}></div></div>
                 })
               }
             </Carousel>
             </Col>
           <Col xs={24} sm={16} lg={18} >
             <Card bordered={false}>
-              <h1>{post.frontmatter.title}</h1>
+              <h1 style={{textTransform:'capitalize'}}>{post.frontmatter.title}</h1>
               <p style={{ color: '#000' }}>
                 <b>Kode Produk : {post.frontmatter.code}</b>
               </p>

@@ -15,7 +15,7 @@ class ProductItem extends React.Component {
         hoverable
         cover={data.frontmatter.images && <img src={data.frontmatter.images[0].img.childImageSharp.resize.src} />}
         >
-          <p>{data.frontmatter.title}</p>
+          <p style={{textTransform:'capitalize'}}>{data.frontmatter.title}</p>
           <p>{data.frontmatter.discount > 0 && <del>Rp. {`${data.frontmatter.price}`}</del>}</p>
           <p>{`Rp. ${data.frontmatter.price - ((data.frontmatter.price * data.frontmatter.discount) / 100)}`}</p>
       </Card></Link >
