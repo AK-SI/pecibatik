@@ -28,10 +28,10 @@ class ProductPostTemplate extends React.Component {
         />
         <Row  style={{marginTop:'30px'}} type="flex" justify="center">
           <Col xs={24} sm={8} lg={6}>
-            <Carousel>
+            <Carousel autoplay effect="fade">
               {
                 post.frontmatter.images.map(({ img }) => {
-                  return <div><div style={{ width:'100%', height:'300px', background:`url(${img.childImageSharp.resize.src}) no-repeat center center fixed`, backgroundSize: "cover" }} key={img.id}></div></div>
+                  return <div><div style={{ width:'100%', minHeight:'350px', background:`url(${img.childImageSharp.fluid.src}) no-repeat center center fixed`, backgroundSize: "cover" }} key={img.id}></div></div>
                 })
               }
             </Carousel>
@@ -102,7 +102,7 @@ export const pageQuery = graphql`
           img{
             id
             childImageSharp {
-              resize(width: 400, height: 400, cropFocus: CENTER) {
+              fluid(maxWidth: 600) {
                 src
               }
             }
