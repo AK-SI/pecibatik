@@ -7,11 +7,13 @@ const { Meta } = Card;
 class ProductItem extends React.Component {
   render() {
     const { data } = this.props
+    console.log(data.frontmatter.images[0].img.childImageSharp.resize.src);
+    
     return (
     <Link to={data.fields.slug}>
       <Card
         hoverable
-        cover={data.frontmatter.image && <img src={data.frontmatter.images[0].image.childImageSharp.resize.src} />}
+        cover={data.frontmatter.images && <img src={data.frontmatter.images[0].img.childImageSharp.resize.src} />}
         >
           <p>{data.frontmatter.title}</p>
           <p>{data.frontmatter.discount > 0 && <del>Rp. {`${data.frontmatter.price}`}</del>}</p>

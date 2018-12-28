@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
+import './style.css'
 import { Menu,Col } from 'antd';
 const AntL = require('antd').Layout
 const { Header, Content, Footer } = AntL;

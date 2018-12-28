@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
-import { Divider,Card,Col, Row } from 'antd';
+import { Icon,Button,Carousel,Divider,Card,Col, Row } from 'antd';
 
 class ProductPostTemplate extends React.Component {
   render() {
@@ -28,9 +28,13 @@ class ProductPostTemplate extends React.Component {
         />
         <Row  style={{marginTop:'30px'}} type="flex" justify="center">
           <Col xs={24} sm={8} lg={6}>
-            <Card bordered={false}
-              cover={post.frontmatter.image && <img src={post.frontmatter.images[0].img.childImageSharp.resize.src} />}
-            />
+            <Carousel>
+              {
+                post.frontmatter.images.map(({ img }) => {
+                  return <div><div style={{ width:'100%', height:'300px', background:`url(${img.childImageSharp.resize.src}) no-repeat center center fixed`, backgroundSize: "cover" }} key={img.id}></div></div>
+                })
+              }
+            </Carousel>
             </Col>
           <Col xs={24} sm={16} lg={18} >
             <Card bordered={false}>
@@ -47,30 +51,26 @@ class ProductPostTemplate extends React.Component {
             
         </Row><Divider>Deskripsi</Divider>
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
-        {
-          post.frontmatter.images.map(({img}) => {
-            return <img src={img.childImageSharp.resize.src} key={img.id}/>
-          })
-        }
         <Divider/>
-        <ul>
-          <li>
-            {
-              previous &&
-              <Link to={previous.fields.slug} rel="prev">
-                ← {previous.frontmatter.title}
+        <Button.Group style={{width:'100%'}}>
+          {
+            previous &&
+            <Link style={{float:'left'}} to={previous.fields.slug} rel="prev">
+              <Button>
+                <Icon type="left" /> {previous.frontmatter.title}
+            </Button>
               </Link>
-            }
-          </li>
-          <li>
-            {
-              next &&
-              <Link to={next.fields.slug} rel="next">
-                {next.frontmatter.title} →
+          }
+          {
+            next &&
+            <Link style={{float:'right'}} to={next.fields.slug} rel="next">
+              <Button>
+                {next.frontmatter.title} <Icon type="right" />
+              </Button>
               </Link>
-            }
-          </li>
-        </ul>
+          }
+          
+        </Button.Group>
       </Layout>
     )
   }
